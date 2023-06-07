@@ -5,7 +5,7 @@ export default interface Publisher {
   }
 
 export interface User {
-  email : string,
-  password : string,
-  accessToken? : string
+  email : any,
+  password : any,
+  accessToken? : any
 }
