@@ -38,9 +38,14 @@ export const PublisherServicePut = (api: AxiosInstance = defaultAxiosInstance) =
 });
 
 export const PublisherServiceDelete = (api: AxiosInstance = defaultAxiosInstance) => ({
-    getPublisher: async (id: number) => {
+    getPublisher: async (id: any) => {
+        console.log("test");
         const response = await api.delete<any>(`publisher/${id}`);
-        return response.data;
+        if (response && response.status === 200) {
+            console.log("publisher successfully deleted");
+        }else{
+            console.log("asldfkjkj");
+        }
     }
 });
 

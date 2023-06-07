@@ -13,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
+import RemovePage from './RemovePage';
 
 const pages = [<AddIcon/>, <RemoveIcon/>];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -42,7 +43,7 @@ function ResponsiveAppBar() {
 };
 
 const handleRemoveClick = () => {
-  console.log("Remove Icon clicked");
+  console.log("Remove Icon clicked")
 };
 
 
@@ -55,7 +56,7 @@ const handleRemoveClick = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/publisher"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },

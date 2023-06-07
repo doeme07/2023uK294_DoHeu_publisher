@@ -3,20 +3,19 @@ import { PublisherServiceGet } from "../../PublisherService";
 import Publisher from "../../types";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-import { Card, CardContent, Grid, Box } from "@mui/material";
+import { Card, CardContent, Grid, Box, Tooltip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import EditForm from "./EditForm";
+import DeleteForm from "./DeleteForm";
 
-const RandomCatForm = () => {
+const MainPage = () => {
   const [publisherList, setPublisherList] = useState<Publisher[]>([]);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   const [editedData, setEditedData] = useState<number | null>(null);
   const [isEditing, setIsEditing] = useState(false);
-
- 
-  
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     PublisherServiceGet()
@@ -32,6 +31,8 @@ const RandomCatForm = () => {
 
   const handleCardClick = (index: number) => {
     setSelectedCardIndex(index);
+    console.log(selectedCardIndex);
+    console.log(selectedCardIndex);
   };
 
   const handleEditFromCLick = (index: number) => {
@@ -47,7 +48,8 @@ const RandomCatForm = () => {
   };
 
   const deleteForm = (index: number) => {
-    console.log("deleting card");
+    setIsDeleting(true);
+    console.log("here");
   };
 
   const handleEditButtonClick = (index:number) => {
@@ -106,22 +108,31 @@ const RandomCatForm = () => {
                 Incorporation Date: {publisherList[selectedCardIndex].incorporation_date}
               </p>
               {editedData !== null && (
-                <EditForm selectedCardIndex={selectedCardIndex} />
+                <EditForm selectedCardIndex={publisherList[selectedCardIndex].id} />
               )}
-              
+              <Tooltip title="Edit Card">
                 <EditIcon
                   onClick={() => handleEditButtonClick(selectedCardIndex)}
                   sx={{ "&:hover": { color: "#1976d2", cursor: "pointer" } }}
                 />
-            
+                </Tooltip>
+              {isDeleting !== false && (
+                <Tooltip title="Delete Card">
+                  <DeleteForm selectedCardIndex={publisherList[selectedCardIndex].id} />
+               </Tooltip>
+              )}
+              <Tooltip title="Delete Card">
               <DeleteIcon
-                onClick={() => deleteForm(selectedCardIndex)}
+                onClick={() => deleteForm(publisherList[selectedCardIndex].id)}
                 sx={{ "&:hover": { color: "#1976d2", cursor: "pointer" } }}
               />
+              </Tooltip>
+              <Tooltip title="Close Window">
               <CloseIcon
                 onClick={closeDetails}
                 sx={{ "&:hover": { color: "red", cursor: "pointer" } }}
               />
+              </Tooltip>
             </CardContent>
           </Card>
         </Box>
@@ -129,4 +140,4 @@ const RandomCatForm = () => {
     </>
   );
 }
-export default RandomCatForm;
+export default MainPage;
