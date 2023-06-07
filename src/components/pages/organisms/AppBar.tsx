@@ -56,7 +56,7 @@ const handleRemoveClick = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/publisher"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
