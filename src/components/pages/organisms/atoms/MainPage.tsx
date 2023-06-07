@@ -17,9 +17,6 @@ const MainPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
- 
-  
-
   useEffect(() => {
     PublisherServiceGet()
       .getPublisher()
