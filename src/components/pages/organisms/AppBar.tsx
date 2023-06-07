@@ -9,16 +9,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
-import { useNavigate } from 'react-router-dom';
-import AddIconCustom from './atoms/addIconMenu';
+import RemovePage from './RemovePage';
 
-const pages = [<AddIconCustom/>];
+const pages = [<AddIcon/>, <RemoveIcon/>];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
-  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -39,8 +39,11 @@ function ResponsiveAppBar() {
   };
 
   const handleAddClick = () => {
-    console.log("hello")
-    navigate("add", {replace : true});
+  console.log("Add Icon clicked");
+};
+
+const handleRemoveClick = () => {
+  console.log("Remove Icon clicked")
 };
 
 
@@ -64,7 +67,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            PUBLISHER
+            UEBUNGEN
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -97,7 +100,7 @@ function ResponsiveAppBar() {
               }}
             >
                {pages.map((page, index) => (
-                  <MenuItem key={index} onClick={handleAddClick} sx={{ justifyContent: 'center' }}>
+                  <MenuItem key={index} onClick={index === 0 ? handleAddClick : handleRemoveClick} sx={{ justifyContent: 'center' }}>
                     <Typography display="flex" alignItems="center" justifyContent="center">{page}</Typography>
                   </MenuItem>
                 ))}

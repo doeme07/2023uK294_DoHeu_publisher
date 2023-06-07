@@ -1,10 +1,10 @@
 const RemovePage = () => {
-    
+    console.log("HELLO");
+
+
 return(
-    <p>
-        Hello
-    </p>
-    )
+    <></>
+)
 }
 
 export default RemovePage;
