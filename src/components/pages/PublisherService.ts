@@ -13,15 +13,23 @@ export const PublisherServiceGetbyId = (api: AxiosInstance = defaultAxiosInstanc
 
 export const PublisherServiceGet= (api: AxiosInstance = defaultAxiosInstance) => ({
     getPublisher: async () => {
-        const response = await api.get<Publisher[]>(`publisher?_limit=20`);
+        const response = await api.get<Publisher[]>(`publisher`);
         return response.data;
     }
 });
 
 export const PublisherServicePost = (api: AxiosInstance = defaultAxiosInstance) => ({
-    getPublisher: async ({publisher_name, incorporation_date}: Publisher) => {
+    postPublisher: async ({publisher_name, incorporation_date}: Publisher) => {
+        console.log("testing..")
+        console.log(publisher_name);
+        console.log(incorporation_date)
         const response = await api.post<any>(`publisher`, { publisher_name, incorporation_date });
-        return response.data;
+        console.log(response);
+        if (response && response.status === 200) {
+            console.log("publisher successfully updated");
+        }else{
+            console.log("asldfkjkj");
+        }
     }
 });
 

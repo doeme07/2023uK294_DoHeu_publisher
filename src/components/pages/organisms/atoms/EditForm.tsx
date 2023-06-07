@@ -22,7 +22,7 @@ const EditForm = ({ selectedCardIndex }: any) => {
       await PublisherServicePut().getPublisher(selectedCardIndex, {
         publisher_name: publisherName,
         incorporation_date: corporationDate,
-      });
+      }).then();
 
       console.log("Form submitted successfully!");
     } catch (error) {

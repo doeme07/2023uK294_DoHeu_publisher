@@ -3,3 +3,9 @@ export default interface Publisher {
     publisher_name: any;
     incorporation_date: any;
   }
+
+export interface User {
+  email : any,
+  password : any,
+  accessToken? : any
+}
