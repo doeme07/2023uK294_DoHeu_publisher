@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Alert from "@mui/material/Alert";
-import { PublisherServiceDelete } from "../../PublisherService";
+import { PublisherServiceDelete } from "./PublisherService";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -13,9 +13,10 @@ const DeleteForm = ({ selectedCardIndex }: any) => {
 
     try {
       console.log(selectedCardIndex);
-      await PublisherServiceDelete().getPublisher(selectedCardIndex);
-
       setIsDeleting(true);
+      await PublisherServiceDelete().getPublisher(selectedCardIndex).then(() => {
+        navigate("/publisher", { replace: true });
+      });
     } catch (error) {
       console.error("Delete failed:", error);
       setIsDeleting(false);

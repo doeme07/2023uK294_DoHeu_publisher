@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import UserServicePost from "./LoginService"; 
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
+  
   const handleSubmit = async (values: any, { setSubmitting, setErrors } : any) => {
     try {
       const { email, password } = values;
@@ -19,7 +19,6 @@ const LoginPage = () => {
         localStorage.setItem("accessToken", response.accessToken);
         navigate("/publisher", { replace: true });
       });
-
     } catch (error) {
       console.error("Form submission failed:", error);
       setSubmitting(false);

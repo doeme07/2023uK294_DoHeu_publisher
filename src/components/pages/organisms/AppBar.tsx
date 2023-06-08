@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import AddIconCustom from './atoms/addIconMenu';
 
 const pages = [<AddIconCustom/>];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
@@ -36,6 +36,11 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const hanldeLogout = () => {
+    localStorage.setItem("accessToken", "");
+    navigate("/", {replace : true});
   };
 
   const handleAddClick = () => {
@@ -154,7 +159,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" onClick={hanldeLogout}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

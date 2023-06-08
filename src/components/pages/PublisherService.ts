@@ -13,7 +13,7 @@ export const PublisherServiceGetbyId = (api: AxiosInstance = defaultAxiosInstanc
 
 export const PublisherServiceGet= (api: AxiosInstance = defaultAxiosInstance) => ({
     getPublisher: async () => {
-        const response = await api.get<Publisher[]>(`publisher`);
+        const response = await api.get<Publisher[]>(`publisher?_limit=30`);
         return response.data;
     }
 });

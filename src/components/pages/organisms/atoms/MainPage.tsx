@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import EditForm from "./EditForm";
-import DeleteForm from "./DeleteForm";
+import DeleteForm from "../../DeleteForm";
 
 const MainPage = () => {
   const [publisherList, setPublisherList] = useState<Publisher[]>([]);
@@ -18,7 +18,8 @@ const MainPage = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    PublisherServiceGet()
+    if(localStorage.getItem("accesToken") !== ""){
+      PublisherServiceGet()
       .getPublisher()
       .then((publisher) => {
         console.log("hello world");
@@ -27,6 +28,7 @@ const MainPage = () => {
       .catch((error) => {
         console.log("error");
       });
+    }
   }, []);
 
   const handleCardClick = (index: number) => {
