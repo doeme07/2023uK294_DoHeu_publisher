@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import UserServicePost from "../service/LoginService";
+import UserServicePost from "../service/LoginService"; 
 import { useNavigate } from "react-router-dom";
-import { Box, Container, Grid, Typography, Button } from "@mui/material";
-import LoginForm  from "./molecules/LoginForm";
-import InputField from "./atoms/TextField";
+import { Box, Container, Grid, TextField, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
-  const handleSubmit = async (values : any, { setSubmitting, setErrors } : any) => {
+  
+  const handleSubmit = async (values: any, { setSubmitting, setErrors } : any) => {
     try {
       const { email, password } = values;
 
       await UserServicePost().Login({
         email: email,
         password: password,
-      }).then((response) => {
+      }).then((response: any) => {
         localStorage.setItem("accessToken", response.accessToken);
         navigate("/publisher", { replace: true });
       });
@@ -42,7 +41,7 @@ const LoginPage = () => {
           initialValues={{ email: "", password: "" }}
           enableReinitialize
           validate={(values) => {
-            const errors : any = {};
+            const errors: { email?: string; password?: string } = {};
 
             if (!values.email) {
               errors.email = "Required";
@@ -67,7 +66,7 @@ const LoginPage = () => {
                   <Field
                     type="email"
                     name="email"
-                    as={InputField}
+                    as={TextField}
                     label="Email"
                     fullWidth
                     variant="outlined"
@@ -81,7 +80,7 @@ const LoginPage = () => {
                   <Field
                     type="password"
                     name="password"
-                    as={InputField}
+                    as={TextField}
                     label="Password"
                     fullWidth
                     variant="outlined"
@@ -113,5 +112,11 @@ const LoginPage = () => {
     </Box>
   );
 };
+
+export function formatAccessToken(response: any): string {
+  const accessToken = response.accessToken;
+  const formattedToken = `Bearer ${accessToken}`;
+  return formattedToken;
+}
 
 export default LoginPage;
