@@ -18,3 +18,5 @@ defaultAxiosInstance.interceptors.request.use((config: InternalAxiosRequestConfi
         return Promise.reject(error);
     }
 )
+
+export default defaultAxiosInstance;

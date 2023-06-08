@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import { defaultAxiosInstance } from "./Api";
-import { User } from "./types";
+import { User } from "./Types";
 
 
 export const UserServicePost = (api: AxiosInstance = defaultAxiosInstance) => ({

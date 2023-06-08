@@ -9,6 +9,7 @@ const AddIconCustom = () => {
                   onClick={() => navigate("add", {replace : true})}
                   sx={{ "&:hover": { color: "#1976d2", cursor: "pointer" } }}
                 />
+                
     )
 }
 

@@ -1,36 +1,25 @@
 import React from "react";
-
 import { Field, Form, Formik } from "formik";
+import Button from "../atoms/Button";
+import TextField from "../atoms/TextField";
+import { PublisherServicePut } from "../../service/PublisherService";
 
-import { TextField, Button } from "@mui/material";
-
-import { PublisherServicePut } from "../../PublisherService";
-
-const EditForm = ({ selectedCardIndex }: any) => {
-  const handleSubmit = async (values: any) => {
-    console.log("im here.");
-
+const EditForm = ({ selectedCardIndex } : any) => {
+  const handleSubmit = async (values : any) => {
     try {
-      console.log(values);
-
       const { publisherName, corporationDate } = values;
-
-
-      console.log(selectedCardIndex);
-    
-
-      await PublisherServicePut().getPublisher(selectedCardIndex, {
-        publisher_name: publisherName,
-        incorporation_date: corporationDate,
-      }).then();
-
+      await PublisherServicePut()
+        .getPublisher(selectedCardIndex, {
+          publisher_name: publisherName,
+          incorporation_date: corporationDate,
+        });
       console.log("Form submitted successfully!");
     } catch (error) {
       console.error("Form submission failed:", error);
     }
   };
 
-  const validateDate = (value: string) => {
+  const validateDate = (value : any) => {
     const dateFormat = /^\d{4}-\d{2}-\d{2}$/;
 
     if (!value.match(dateFormat)) {
@@ -45,16 +34,17 @@ const EditForm = ({ selectedCardIndex }: any) => {
       initialValues={{ publisherName: "", corporationDate: "" }}
       onSubmit={handleSubmit}
       validate={(values) => {
-        const errors: { corporationDate?: string } = {};
+        const errors : any = {};
 
-        const errorMessageDate: string = validateDate(values.corporationDate);
+        const errorMessageDate = validateDate(values.corporationDate);
 
         if (errorMessageDate !== "") {
           errors.corporationDate = errorMessageDate;
         }
 
         return errors;
-      }}>
+      }}
+    >
       <Form>
         <div style={{ marginBottom: "1rem" }}>
           <Field name="publisherName" label="Publisher Name" as={TextField} />
@@ -72,7 +62,8 @@ const EditForm = ({ selectedCardIndex }: any) => {
         <Button
           type="submit"
           variant="contained"
-          style={{ marginBottom: "1rem" }}>
+          style={{ marginBottom: "1rem" }}
+        >
           Submit
         </Button>
       </Form>

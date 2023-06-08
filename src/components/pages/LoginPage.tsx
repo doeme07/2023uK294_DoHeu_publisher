@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import UserServicePost from "./LoginService"; 
+import UserServicePost from "../service/LoginService";
 import { useNavigate } from "react-router-dom";
-import { Box, Container, Grid, TextField, Typography } from "@mui/material";
-import { Button } from "@mui/material";
+import { Box, Container, Grid, Typography, Button } from "@mui/material";
+import LoginForm  from "./molecules/LoginForm";
+import InputField from "./atoms/TextField";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  
-  const handleSubmit = async (values: any, { setSubmitting, setErrors } : any) => {
+
+  const handleSubmit = async (values : any, { setSubmitting, setErrors } : any) => {
     try {
       const { email, password } = values;
 
@@ -41,7 +42,7 @@ const LoginPage = () => {
           initialValues={{ email: "", password: "" }}
           enableReinitialize
           validate={(values) => {
-            const errors: { email?: string; password?: string } = {};
+            const errors : any = {};
 
             if (!values.email) {
               errors.email = "Required";
@@ -66,7 +67,7 @@ const LoginPage = () => {
                   <Field
                     type="email"
                     name="email"
-                    as={TextField}
+                    as={InputField}
                     label="Email"
                     fullWidth
                     variant="outlined"
@@ -80,7 +81,7 @@ const LoginPage = () => {
                   <Field
                     type="password"
                     name="password"
-                    as={TextField}
+                    as={InputField}
                     label="Password"
                     fullWidth
                     variant="outlined"
@@ -112,11 +113,5 @@ const LoginPage = () => {
     </Box>
   );
 };
-
-export function formatAccessToken(response: any): string {
-  const accessToken = response.accessToken;
-  const formattedToken = `Bearer ${accessToken}`;
-  return formattedToken;
-}
 
 export default LoginPage;

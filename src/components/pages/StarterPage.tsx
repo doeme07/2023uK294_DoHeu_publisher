@@ -1,6 +1,6 @@
 import { Box, Container, Grid } from "@mui/material";
 import AppBar from "./organisms/AppBar";
-import MainPage from "./organisms/atoms/MainPage";
+import MainPage from "./MainPage";
 
 const StarterPage = () => {
     return (
